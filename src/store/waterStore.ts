@@ -21,7 +21,7 @@ interface WaterStore {
   addQuickAmount: (amount: number) => void;
   removeQuickAmount: (amount: number) => void;
   getTodayTotal: () => number;
-  getWeeklyData: () => Promise<{ date: string; total: number; logs: { time: string; amount: number }[] }[]>;
+  getWeeklyData: (userId: string) => Promise<{ date: string; total: number; logs: { time: string; amount: number }[] }[]>;
   resetTodayLogs: () => Promise<void>;
   fetchUserLogs: (userId: string) => Promise<void>;
 }
@@ -73,7 +73,7 @@ export const useWaterStore = create<WaterStore>()(
           .reduce((sum, log) => sum + log.amount, 0);
       },
       
-      getWeeklyData: async () => {
+      getWeeklyData: async (userId) => {
         const days = 7;
         const data = [];
         const now = new Date();
@@ -85,7 +85,8 @@ export const useWaterStore = create<WaterStore>()(
           
           const q = query(
             collection(db, 'waterLogs'),
-            where('date', '==', formattedDate)
+            where('date', '==', formattedDate),
+            where('userId', '==', userId)
           );
           
           const querySnapshot = await getDocs(q);

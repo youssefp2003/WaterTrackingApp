@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
 import { useWaterStore } from '../../store/waterStore';
 import { DayLogItem } from './DayLogItem';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface WaterHistoryProps {
   onClose: () => void;
@@ -15,17 +16,20 @@ interface DayData {
 
 export const WaterHistory: React.FC<WaterHistoryProps> = ({ onClose }) => {
   const { getWeeklyData, dailyGoal } = useWaterStore();
+  const { user } = useAuth();
   const [weeklyData, setWeeklyData] = useState<DayData[]>([]);
   const [expandedDay, setExpandedDay] = useState<string | null>(null);
   const maxValue = Math.max(...weeklyData.map((d) => d.total), dailyGoal);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getWeeklyData();
-      setWeeklyData(data);
+      if (user?.id) {
+        const data = await getWeeklyData(user.id);
+        setWeeklyData(data);
+      }
     };
     fetchData();
-  }, [getWeeklyData]);
+  }, [getWeeklyData, user?.id]);
 
   // Handle click outside to close
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
