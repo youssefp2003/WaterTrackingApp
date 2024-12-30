@@ -86,9 +86,4 @@ Contributions are welcome! Follow these steps to contribute:
 
 This project is licensed under the **MIT License**. See the `LICENSE` file for more details.  
 
----
 
-## **Contact**  
-
-- **Your Name**: [@yourusername](https://github.com/yourusername)  
-- **Project Repository**: [Water Tracker App](https://github.com/yourusername/watertracker)  
