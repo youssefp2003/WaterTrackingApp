@@ -1,5 +1,3 @@
----
-
 # 💧 **Water Tracker App**
 
 A modern React application designed to help users track their daily water intake, set hydration goals, and maintain healthy drinking habits. The app is built with React and Firebase for real-time data synchronization, user authentication, and secure cloud storage.
