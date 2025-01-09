@@ -8,8 +8,6 @@ A modern React application designed to help users track their daily water intake
 
 ### **User Authentication**
 - **Secure Sign-up and Login**: Using Firebase Authentication for secure access.
-- **Google Sign-in Integration**: Log in with Google for a seamless experience.
-- **Password Reset**: Easily reset your password with email-based recovery.
 
 ### **Water Intake Tracking**
 - **Log Water Intake**: Track water consumption with customizable amounts.
@@ -23,8 +21,7 @@ A modern React application designed to help users track their daily water intake
 
 ### **Statistics & History**
 - **Visualization**: Interactive charts to track your drinking patterns.
-- **Weekly & Monthly Summaries**: Track your hydration habits over time.
-- **Exportable History**: Download your hydration data for personal records.
+- **Weekly Summaries**: Track your hydration habits over time.
 
 ### **Reminders**
 - **Customizable Reminders**: Set personalized drinking reminders.
