@@ -1,13 +1,15 @@
+---
+
 # 💧 **Water Tracker App**
 
-A modern React application designed to help users track their daily water intake, set hydration goals, and maintain healthy drinking habits. The app is built with React and Firebase for real-time data synchronization, user authentication, and secure cloud storage.
+A modern React application designed to help users track their daily water intake, set hydration goals, and maintain healthy drinking habits. The app is built with **React**, **TypeScript**, and **Firebase** for real-time data synchronization, user authentication, and secure cloud storage.
 
 ---
 
 ## ✨ **Features**
 
 ### **User Authentication**
-- **Secure Sign-up and Login**: Using Firebase Authentication for secure access.
+- Secure sign-up and login using Firebase Authentication.
 
 ### **Water Intake Tracking**
 - **Log Water Intake**: Track water consumption with customizable amounts.
@@ -17,65 +19,69 @@ A modern React application designed to help users track their daily water intake
 ### **Personalized Goals**
 - **Set and Modify Goals**: Customize your daily water intake targets.
 - **Progress Bar**: Visual indicator showing the percentage of your goal completed.
-- **Smart Recommendations**: Receive hydration suggestions based on your profile.
 
 ### **Statistics & History**
 - **Visualization**: Interactive charts to track your drinking patterns.
 - **Weekly Summaries**: Track your hydration habits over time.
-
-### **Reminders**
-- **Customizable Reminders**: Set personalized drinking reminders.
-- **Browser Notifications**: Receive timely alerts to remind you to hydrate.
-- **Smart Scheduling**: Schedule reminders based on your preferred time of day.
 
 ---
 
 ## 🚀 **Technologies Used**
 
 ### **Frontend**
-- **React 18**: Powerful frontend framework for building interactive UIs.
-- **Material-UI (MUI)**: Modern UI component library for responsive design.
-- **Chart.js**: For rendering interactive hydration charts.
-- **React Router**: Navigation management for smooth user experience.
+- **React 18**: For building a dynamic and interactive user interface.
+- **TypeScript**: Adds static typing for better code quality and developer experience.
+- **Tailwind CSS**: Utility-first CSS framework for efficient and modern styling.
+- **Chart.js**: Interactive and customizable charts for hydration data visualization.
+- **React Router**: Seamless navigation across app pages.
 
 ### **Backend & Database**
 - **Firebase Authentication**: Secure user sign-in and authentication.
 - **Cloud Firestore**: Real-time NoSQL database for storing water logs and user profiles.
-- **Firebase Hosting**: Scalable cloud hosting solution for your app.
+
+### **Build Tools**
+- **Vite**: Lightning-fast build tool and dev server.
+- **PostCSS**: For CSS transformations and optimizations.
+
+### **Linting & State Management**
+- **ESLint**: Maintain consistent code quality.
+- **React Context API** and/or **Zustand**: Manage global state efficiently.
 
 ---
 
 ## 📦 **Installation**
 
+### Prerequisites
+- Install [Node.js](https://nodejs.org/) (v14 or higher) and npm (or Yarn).
+
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/watertracker.git
-cd watertracker
+git clone https://github.com/youssefp2003/watertrackingapp.git
+cd watertrackingapp
 ```
 
 ### 2. Install Dependencies
 ```bash
 npm install
 ```
+or
+```bash
+yarn install
+```
 
 ### 3. Set Up Firebase
-- Create a **Firebase project** in the [Firebase Console](https://console.firebase.google.com/).
+- Create a Firebase project in the [Firebase Console](https://console.firebase.google.com/).
 - Enable **Authentication** methods (Email/Password, Google, etc.).
 - Set up a **Firestore database**.
-- Copy your Firebase configuration details and create a `.env` file in the project root:
-
-```bash
-REACT_APP_FIREBASE_API_KEY=your_api_key
-REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
-REACT_APP_FIREBASE_PROJECT_ID=your_project_id
-REACT_APP_FIREBASE_STORAGE_BUCKET=your_storage_bucket
-REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-REACT_APP_FIREBASE_APP_ID=your_app_id
-```
+- Copy your Firebase configuration details into `src/firebase.ts`.
 
 ### 4. Start the Development Server
 ```bash
-npm start
+npm run dev
+```
+or
+```bash
+yarn dev
 ```
 
 ### 5. Build for Production
@@ -87,13 +93,9 @@ npm run build
 
 ## 🔧 **Configuration**
 
-### **Firebase Setup**
-1. Go to the **Firebase Console** and create a new project.
-2. Enable the following **Authentication methods**:
-   - Email/Password
-   - Google (optional)
-3. Create a **Firestore database** and configure Firestore rules:
-   
+### Firebase Rules for Firestore
+Add the following security rules to Firestore to ensure data privacy:
+
 ```plaintext
 rules_version = '2';
 service cloud.firestore {
@@ -114,7 +116,6 @@ service cloud.firestore {
 
 ### **Sign Up/Login**
 1. Create an account or log in using existing credentials.
-2. Optionally, use **Google Sign-in** for convenience.
 
 ### **Set Daily Goal**
 1. Navigate to **Settings**.
@@ -128,12 +129,31 @@ service cloud.firestore {
 
 ### **View Statistics**
 1. Check your **daily progress** with a visual progress bar.
-2. View **weekly** and **monthly** charts to track your hydration habits.
-3. Export your **drinking history** if needed.
+2. View **weekly** charts to track your hydration habits.
+   
+---
 
-### **Set Reminders**
-1. Enable **notifications** to receive reminders.
-2. Set the **frequency** and **customize reminder times** to suit your routine.
+## 📂 **Project Structure**
+
+```plaintext
+youssefp2003-watertrackingapp/
+├── README.md                # Project documentation
+├── eslint.config.js         # ESLint configuration
+├── index.html               # HTML entry point
+├── package.json             # Node.js dependencies
+├── postcss.config.js        # PostCSS configuration
+├── tailwind.config.js       # Tailwind CSS configuration
+├── tsconfig.*.json          # TypeScript configuration files
+├── vite.config.ts           # Vite configuration
+└── src/                     # Source code
+    ├── App.tsx              # Main app component
+    ├── firebase.ts          # Firebase setup
+    ├── components/          # Reusable components
+    ├── contexts/            # Context API files
+    ├── store/               # State management
+    ├── types.ts             # TypeScript types
+    └── styles/              # Global styles
+```
 
 ---
 
@@ -164,6 +184,6 @@ This project is licensed under the **MIT License**. For more details, refer to t
 ---
 
 ## 👥 **Authors**
-- **Youssef Abdelmoumene** – [GitHub Profile](https://github.com/youssef2003)
+- **Youssef Abdelmoumene** – [GitHub Profile](https://github.com/youssefp2003)
 
----
+--- 
