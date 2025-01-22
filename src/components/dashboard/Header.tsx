@@ -1,5 +1,5 @@
 import React from 'react';
-import { Droplets, Settings, History as HistoryIcon } from 'lucide-react';
+import { Droplets, Settings, History as HistoryIcon, LogOut } from 'lucide-react';
 
 interface HeaderProps {
   username: string;
@@ -15,32 +15,34 @@ export const Header: React.FC<HeaderProps> = ({
   onLogout,
 }) => {
   return (
-    <header className="bg-white shadow">
-      <div className="max-w-7xl mx-auto px-4 py-4 sm:py-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <header className="bg-white shadow-sm">
+      <div className="max-w-lg mx-auto px-4 py-3">
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Droplets className="text-blue-500" size={32} />
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">HydroTracker</h1>
+            <Droplets className="text-blue-500" size={24} />
+            <h1 className="text-xl font-bold text-gray-900">HydroTracker</h1>
           </div>
-          <div className="flex items-center gap-3 sm:gap-4">
-            <span className="text-sm sm:text-base text-gray-600">Hi, {username}</span>
+          <div className="flex items-center gap-1">
             <button
               onClick={onHistoryClick}
-              className="p-2 text-gray-600 hover:text-gray-800 rounded-lg hover:bg-gray-100"
+              className="p-2 text-gray-600 hover:text-gray-800 rounded-lg hover:bg-gray-50"
+              aria-label="History"
             >
               <HistoryIcon size={20} />
             </button>
             <button
               onClick={onSettingsClick}
-              className="p-2 text-gray-600 hover:text-gray-800 rounded-lg hover:bg-gray-100"
+              className="p-2 text-gray-600 hover:text-gray-800 rounded-lg hover:bg-gray-50"
+              aria-label="Settings"
             >
               <Settings size={20} />
             </button>
             <button
               onClick={onLogout}
-              className="px-3 py-1.5 sm:px-4 sm:py-2 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 transition-colors"
+              className="p-2 text-gray-600 hover:text-gray-800 rounded-lg hover:bg-gray-50"
+              aria-label="Logout"
             >
-              Logout
+              <LogOut size={20} />
             </button>
           </div>
         </div>

@@ -4,10 +4,12 @@
 
 :root {
   color-scheme: light;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  @apply text-gray-900 bg-gray-50;
+  @apply text-gray-900 bg-gray-50 antialiased;
+  overscroll-behavior: none;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -18,4 +20,9 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+/* Improve touch targets */
+button, input {
+  touch-action: manipulation;
 }

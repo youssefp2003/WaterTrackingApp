@@ -30,14 +30,14 @@ export const QuickAdd: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-4">
+    <div className="bg-white rounded-2xl shadow-sm p-4">
       <div className="flex justify-between items-center mb-3">
-        <h2 className="text-lg font-semibold">Quick Add</h2>
+        <h2 className="text-lg font-semibold text-gray-900">Quick Add</h2>
         <button
           onClick={() => setShowAddCustom(!showAddCustom)}
-          className="text-blue-500 hover:text-blue-600 flex items-center gap-1"
+          className="text-blue-500 hover:text-blue-600 flex items-center gap-1 text-sm font-medium"
         >
-          <Plus size={20} />
+          <Plus size={18} />
           Add Custom
         </button>
       </div>
@@ -49,12 +49,12 @@ export const QuickAdd: React.FC = () => {
             value={newAmount}
             onChange={(e) => setNewAmount(e.target.value)}
             placeholder="Enter amount in ml"
-            className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             min="1"
           />
           <button
             type="submit"
-            className="p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+            className="px-4 py-2 bg-blue-500 text-white rounded-xl text-sm font-medium hover:bg-blue-600 transition-colors"
           >
             Add
           </button>
@@ -66,16 +66,16 @@ export const QuickAdd: React.FC = () => {
           <div key={amount} className="relative group">
             <button
               onClick={() => handleQuickAdd(amount)}
-              className="w-full flex items-center justify-center gap-2 p-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+              className="w-full flex items-center justify-center gap-1.5 py-3 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl transition-colors text-sm font-medium"
             >
-              <PlusCircle size={20} />
+              <PlusCircle size={16} />
               {amount}ml
             </button>
             <button
               onClick={() => removeQuickAmount(amount)}
-              className="absolute -top-2 -right-2 hidden group-hover:flex bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+              className="absolute -top-1 -right-1 hidden group-hover:flex bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
             >
-              <X size={14} />
+              <X size={12} />
             </button>
           </div>
         ))}
