@@ -8,6 +8,10 @@ export const QuickAdd: React.FC = () => {
   const { quickAddAmounts, addWaterLog, addQuickAmount, removeQuickAmount } = useWaterStore();
   const [showAddCustom, setShowAddCustom] = useState(false);
   const [newAmount, setNewAmount] = useState('');
+<<<<<<< HEAD
+=======
+  const [instantAmount, setInstantAmount] = useState('');
+>>>>>>> 242ed06 (bar fix)
 
   const handleAddCustomAmount = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,6 +23,18 @@ export const QuickAdd: React.FC = () => {
     }
   };
 
+<<<<<<< HEAD
+=======
+  const handleInstantAdd = (e: React.FormEvent) => {
+    e.preventDefault();
+    const amount = parseInt(instantAmount);
+    if (amount > 0 && user) {
+      addWaterLog(amount, user.id);
+      setInstantAmount('');
+    }
+  };
+
+>>>>>>> 242ed06 (bar fix)
   const handleQuickAdd = async (amount: number) => {
     if (user) {
       try {
@@ -61,7 +77,11 @@ export const QuickAdd: React.FC = () => {
         </form>
       )}
 
+<<<<<<< HEAD
       <div className="grid grid-cols-3 gap-2">
+=======
+      <div className="grid grid-cols-3 gap-2 mb-4">
+>>>>>>> 242ed06 (bar fix)
         {quickAddAmounts.map((amount) => (
           <div key={amount} className="relative group">
             <button
@@ -80,6 +100,27 @@ export const QuickAdd: React.FC = () => {
           </div>
         ))}
       </div>
+<<<<<<< HEAD
+=======
+
+      <form onSubmit={handleInstantAdd} className="flex gap-2">
+        <input
+          type="number"
+          value={instantAmount}
+          onChange={(e) => setInstantAmount(e.target.value)}
+          placeholder="Enter custom amount in ml"
+          className="flex-1 px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          min="1"
+        />
+        <button
+          type="submit"
+          className="px-4 py-2 bg-blue-500 text-white rounded-xl text-sm font-medium hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={!instantAmount || parseInt(instantAmount) <= 0}
+        >
+          Add
+        </button>
+      </form>
+>>>>>>> 242ed06 (bar fix)
     </div>
   );
 };
