@@ -8,10 +8,7 @@ export const QuickAdd: React.FC = () => {
   const { quickAddAmounts, addWaterLog, addQuickAmount, removeQuickAmount } = useWaterStore();
   const [showAddCustom, setShowAddCustom] = useState(false);
   const [newAmount, setNewAmount] = useState('');
-<<<<<<< HEAD
-=======
   const [instantAmount, setInstantAmount] = useState('');
->>>>>>> 242ed06 (bar fix)
 
   const handleAddCustomAmount = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,8 +20,6 @@ export const QuickAdd: React.FC = () => {
     }
   };
 
-<<<<<<< HEAD
-=======
   const handleInstantAdd = (e: React.FormEvent) => {
     e.preventDefault();
     const amount = parseInt(instantAmount);
@@ -34,7 +29,6 @@ export const QuickAdd: React.FC = () => {
     }
   };
 
->>>>>>> 242ed06 (bar fix)
   const handleQuickAdd = async (amount: number) => {
     if (user) {
       try {
@@ -77,11 +71,7 @@ export const QuickAdd: React.FC = () => {
         </form>
       )}
 
-<<<<<<< HEAD
-      <div className="grid grid-cols-3 gap-2">
-=======
       <div className="grid grid-cols-3 gap-2 mb-4">
->>>>>>> 242ed06 (bar fix)
         {quickAddAmounts.map((amount) => (
           <div key={amount} className="relative group">
             <button
@@ -100,8 +90,6 @@ export const QuickAdd: React.FC = () => {
           </div>
         ))}
       </div>
-<<<<<<< HEAD
-=======
 
       <form onSubmit={handleInstantAdd} className="flex gap-2">
         <input
@@ -120,7 +108,6 @@ export const QuickAdd: React.FC = () => {
           Add
         </button>
       </form>
->>>>>>> 242ed06 (bar fix)
     </div>
   );
 };
