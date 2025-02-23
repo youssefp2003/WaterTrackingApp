@@ -11,7 +11,11 @@ export const WaterProgress: React.FC = () => {
     <div className="bg-white rounded-2xl shadow-sm p-4">
       <div className="relative h-48 bg-blue-50 rounded-2xl overflow-hidden">
         <div
+<<<<<<< HEAD
           className="absolute bottom-0 w-full bg-blue-500 transition-all duration-500 ease-out"
+=======
+          className="absolute bottom-0 w-full bg-blue-500 transition-all duration-700 ease-out"
+>>>>>>> 8be8f0c (pre-workign-notif)
           style={{ height: `${progress}%` }}
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-blue-900">
