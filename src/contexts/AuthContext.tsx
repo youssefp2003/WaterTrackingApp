@@ -8,10 +8,7 @@ import {
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { User } from '../types';
-<<<<<<< HEAD
-=======
 import { notificationService } from '../services/NotificationService';
->>>>>>> 8be8f0c (pre-workign-notif)
 
 interface AuthContextType {
   user: User | null;
@@ -35,16 +32,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (firebaseUser) {
           const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
           if (userDoc.exists()) {
-<<<<<<< HEAD
-            setUser({
-              id: firebaseUser.uid,
-              email: firebaseUser.email!,
-              username: userDoc.data().username,
-              dailyGoal: userDoc.data().dailyGoal || 2000,
-              preferredUnit: userDoc.data().preferredUnit || 'ml',
-              quickAddOptions: userDoc.data().quickAddOptions || [250, 500, 750]
-            });
-=======
             const userData = userDoc.data();
             setUser({
               id: firebaseUser.uid,
@@ -69,32 +56,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 );
               }
             }
->>>>>>> 8be8f0c (pre-workign-notif)
           } else {
             const userData = {
               email: firebaseUser.email!,
               username: firebaseUser.email!.split('@')[0],
               dailyGoal: 2000,
               preferredUnit: 'ml',
-<<<<<<< HEAD
-              quickAddOptions: [250, 500, 750]
-=======
               quickAddOptions: [250, 500, 750],
               reminderEnabled: false,
               reminderInterval: 60,
               reminderStartTime: '08:00',
               reminderEndTime: '22:00'
->>>>>>> 8be8f0c (pre-workign-notif)
             };
             await setDoc(doc(db, 'users', firebaseUser.uid), userData);
             setUser({ id: firebaseUser.uid, ...userData });
           }
         } else {
           setUser(null);
-<<<<<<< HEAD
-=======
           notificationService.stopReminders();
->>>>>>> 8be8f0c (pre-workign-notif)
         }
       } catch (error) {
         console.error("Auth state change error:", error);
@@ -104,14 +83,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     });
 
-<<<<<<< HEAD
-    return () => unsubscribe();
-=======
     return () => {
       unsubscribe();
       notificationService.stopReminders();
     };
->>>>>>> 8be8f0c (pre-workign-notif)
   }, []);
 
   const login = async (email: string, password: string) => {
@@ -119,16 +94,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const result = await signInWithEmailAndPassword(auth, email, password);
       const userDoc = await getDoc(doc(db, 'users', result.user.uid));
       if (userDoc.exists()) {
-<<<<<<< HEAD
-        setUser({
-          id: result.user.uid,
-          email: result.user.email!,
-          username: userDoc.data().username,
-          dailyGoal: userDoc.data().dailyGoal || 2000,
-          preferredUnit: userDoc.data().preferredUnit || 'ml',
-          quickAddOptions: userDoc.data().quickAddOptions || [250, 500, 750]
-        });
-=======
         const userData = userDoc.data();
         setUser({
           id: result.user.uid,
@@ -153,7 +118,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             );
           }
         }
->>>>>>> 8be8f0c (pre-workign-notif)
       }
     } catch (error: any) {
       console.error('Login error:', error);
@@ -178,15 +142,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         email,
         dailyGoal: 2000,
         preferredUnit: 'ml',
-<<<<<<< HEAD
-        quickAddOptions: [250, 500, 750]
-=======
         quickAddOptions: [250, 500, 750],
         reminderEnabled: false,
         reminderInterval: 60,
         reminderStartTime: '08:00',
         reminderEndTime: '22:00'
->>>>>>> 8be8f0c (pre-workign-notif)
       };
       
       await setDoc(doc(db, 'users', firebaseUser.uid), userData);
@@ -210,10 +170,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       await signOut(auth);
       setUser(null);
-<<<<<<< HEAD
-=======
       notificationService.stopReminders();
->>>>>>> 8be8f0c (pre-workign-notif)
     } catch (error) {
       console.error('Logout error:', error);
       throw new Error('Failed to logout. Please try again.');
