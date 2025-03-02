@@ -5,10 +5,6 @@ export interface User {
   dailyGoal: number;
   preferredUnit: 'ml' | 'oz';
   quickAddOptions: number[];
-  reminderEnabled: boolean;
-  reminderInterval: number; // in minutes
-  reminderStartTime: string; // HH:mm format
-  reminderEndTime: string; // HH:mm format
 }
 
 export interface WaterLog {

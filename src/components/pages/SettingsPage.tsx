@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Scale, Bell } from 'lucide-react';
+import React, { useState } from 'react';
+import { Scale } from 'lucide-react';
 import { useWaterStore } from '../../store/waterStore';
-import { notificationService } from '../../services/NotificationService';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
@@ -11,25 +10,6 @@ export const SettingsPage: React.FC = () => {
   const { user } = useAuth();
   const [newGoal, setNewGoal] = useState(dailyGoal.toString());
   const [weight, setWeight] = useState('');
-  const [reminderEnabled, setReminderEnabled] = useState(user?.reminderEnabled ?? false);
-  const [reminderInterval, setReminderInterval] = useState(user?.reminderInterval?.toString() ?? '60');
-  const [reminderStartTime, setReminderStartTime] = useState(user?.reminderStartTime ?? '08:00');
-  const [reminderEndTime, setReminderEndTime] = useState(user?.reminderEndTime ?? '22:00');
-  const [notificationPermission, setNotificationPermission] = useState(Notification.permission);
-
-  useEffect(() => {
-    if (reminderEnabled && notificationPermission === 'granted') {
-      notificationService.startReminders(
-        parseInt(reminderInterval),
-        reminderStartTime,
-        reminderEndTime
-      );
-    } else {
-      notificationService.stopReminders();
-    }
-
-    return () => notificationService.stopReminders();
-  }, [reminderEnabled, reminderInterval, reminderStartTime, reminderEndTime, notificationPermission]);
 
   const calculateDailyGoal = (weightKg: number) => {
     return Math.round(weightKg * 35);
@@ -54,28 +34,10 @@ export const SettingsPage: React.FC = () => {
     if (user?.id) {
       try {
         await updateDoc(doc(db, 'users', user.id), {
-          reminderEnabled,
-          reminderInterval: parseInt(reminderInterval),
-          reminderStartTime,
-          reminderEndTime
+          dailyGoal: goal
         });
-
-        if (reminderEnabled) {
-          const hasPermission = await notificationService.requestPermission();
-          setNotificationPermission(hasPermission ? 'granted' : 'denied');
-          
-          if (hasPermission) {
-            notificationService.startReminders(
-              parseInt(reminderInterval),
-              reminderStartTime,
-              reminderEndTime
-            );
-          }
-        } else {
-          notificationService.stopReminders();
-        }
       } catch (error) {
-        console.error('Error updating reminder settings:', error);
+        console.error('Error updating settings:', error);
       }
     }
   };
@@ -124,84 +86,6 @@ export const SettingsPage: React.FC = () => {
                 required
               />
             </div>
-          </form>
-        </div>
-
-        <div className="bg-white rounded-2xl shadow-sm p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-            <Bell size={20} />
-            Reminder Settings
-          </h3>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="flex items-center justify-between">
-              <label htmlFor="reminderEnabled" className="text-sm font-medium text-gray-700">
-                Enable Reminders
-              </label>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  id="reminderEnabled"
-                  checked={reminderEnabled}
-                  onChange={(e) => setReminderEnabled(e.target.checked)}
-                  className="sr-only peer"
-                />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
-              </label>
-            </div>
-
-            {reminderEnabled && (
-              <>
-                <div>
-                  <label htmlFor="reminderInterval" className="block text-sm font-medium text-gray-700 mb-1">
-                    Reminder Interval
-                  </label>
-                  <select
-                    id="reminderInterval"
-                    value={reminderInterval}
-                    onChange={(e) => setReminderInterval(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    <option value="30">Every 30 minutes</option>
-                    <option value="60">Every hour</option>
-                    <option value="90">Every 1.5 hours</option>
-                    <option value="120">Every 2 hours</option>
-                    <option value="180">Every 3 hours</option>
-                    <option value="240">Every 4 hours</option>
-                    <option value="300">Every 5 hours</option>
-                    <option value="360">Every 6 hours</option>
-                  </select>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="startTime" className="block text-sm font-medium text-gray-700 mb-1">
-                      Start Time
-                    </label>
-                    <input
-                      type="time"
-                      id="startTime"
-                      value={reminderStartTime}
-                      onChange={(e) => setReminderStartTime(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="endTime" className="block text-sm font-medium text-gray-700 mb-1">
-                      End Time
-                    </label>
-                    <input
-                      type="time"
-                      id="endTime"
-                      value={reminderEndTime}
-                      onChange={(e) => setReminderEndTime(e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                  </div>
-                </div>
-              </>
-            )}
 
             <button
               type="submit"
